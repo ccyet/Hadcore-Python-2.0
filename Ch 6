@@ -312,35 +312,31 @@ def myPop(lst):
     你可以让用户来选择水平排序或者垂直排序.
 '''
 def output(seq,flag,cnt):
-    print('* please input an integers sequence\n',' and decide the way of output by "col" or "row"')
-    amnts = int(len(seq) / cnt)
     l = len(seq)
-    length = l % cnt
-
-    if flag == 'row':
-        new = []
-        for i in range(1,amnts+1):
-            tmp = []
-            mul = i * cnt
-            omul = (i-1)*cnt
-            tmp = seq[omul:mul]
-            new.append(tmp)
-        if length:
-            new_line = []
-            new_line = seq[-length - 1:]
-            new.append(new_line)
-        [print(n) for n in new]
-    elif flag == 'col':
-        new = []
-        for i in range(1, amnts + 1):
-            tmp = []
-            mul = i * cnt
-            omul = (i - 1) * cnt
-            tmp = seq[omul:mul]
-            new.append(tmp)
-        if length:
-            for i in range(length):
-                new[i].append(seq[l-length+i])
-        [print(n) for n in new]
+    if l >= cnt:
+        amnts = int(l / cnt) #每组个数
+        length = l % cnt #多余元素
+        if flag == 'row':
+            new = []
+            for i in range(0,cnt*(amnts+1),amnts+1):
+                tmp = []
+                mul = i + amnts+1
+                tmp = seq[i:mul]
+                new.append(tmp)
+            [print(n) for n in new]
+        elif flag == 'col':
+            new = []
+            for i in range(1, amnts + 1):
+                tmp = []
+                mul = i * cnt
+                omul = (i - 1) * cnt
+                tmp = seq[omul:mul]
+                new.append(tmp)
+            if length:
+                for i in range(length):
+                    new[i].append(seq[l-length+i])
+            [print(n) for n in new]
+        else:
+            print('unavailable variable')
     else:
-        print('unavailable variable')
+        print('Row or Column locked')
