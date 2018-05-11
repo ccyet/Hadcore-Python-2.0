@@ -314,29 +314,33 @@ def myPop(lst):
 def output(seq,flag,cnt):
     l = len(seq)
     if l >= cnt:
-        amnts = int(l / cnt) #每组个数
-        length = l % cnt #多余元素
+        length = l % cnt
         if flag == 'row':
+            amnts = int(l / cnt) #每组含元素个数
             new = []
             for i in range(0,cnt*(amnts+1),amnts+1):
                 tmp = []
                 mul = i + amnts+1
                 tmp = seq[i:mul]
                 new.append(tmp)
+
             [print(n) for n in new]
         elif flag == 'col':
+            amnts = cnt #每组含元素个数
             new = []
-            for i in range(1, amnts + 1):
+            if length:
+                x = 2 #调节最后一行
+            else:
+                x =1
+            for i in range(1, int(l/cnt)+x):
                 tmp = []
                 mul = i * cnt
                 omul = (i - 1) * cnt
                 tmp = seq[omul:mul]
                 new.append(tmp)
-            if length:
-                for i in range(length):
-                    new[i].append(seq[l-length+i])
+
             [print(n) for n in new]
         else:
             print('unavailable variable')
     else:
-        print('Row or Column locked')
+        print('row or column cannot exceed the length of your sequence')
