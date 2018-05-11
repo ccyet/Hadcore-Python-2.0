@@ -318,9 +318,13 @@ def output(seq,flag,cnt):
         if flag == 'row':
             amnts = int(l / cnt) #每组含元素个数
             new = []
-            for i in range(0,cnt*(amnts+1),amnts+1):
+            if length:
+                x = 1 #调节每组个数
+            else:
+                x = 0
+            for i in range(0,cnt*(amnts+x),amnts+x):
                 tmp = []
-                mul = i + amnts+1
+                mul = i + amnts+x
                 tmp = seq[i:mul]
                 new.append(tmp)
 
@@ -344,3 +348,5 @@ def output(seq,flag,cnt):
             print('unavailable variable')
     else:
         print('row or column cannot exceed the length of your sequence')
+m = [i for i in range(66)]
+output(m,'row',2)
